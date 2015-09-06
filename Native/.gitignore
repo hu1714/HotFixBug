@@ -1,0 +1,8 @@
+Pods
+HotFixBug.xcodeproj/project.xcworkspace/xcuserdata
+HotFixBug.xcodeproj/xcuserdata
+HotFixBug.xcworkspace/xcuserdata
+HotFixBug.xcworkspace/xcshareddata
+Podfile.lock
+*.xccheckout
+.DS_Store
