@@ -8,6 +8,14 @@
 
 #import "ViewController.h"
 
+@implementation TestObject
+
+-(void)test{
+    NSLog(@"test");
+}
+
+@end
+
 @interface ViewController ()
 
 @end
@@ -20,6 +28,9 @@
     
     [self jsSel];
     [self localSel];
+    
+    TestObject *obj = [[TestObject alloc] init];
+    [obj test];
 }
 
 -(void)localSel{

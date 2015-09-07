@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@interface TestObject : NSObject
+-(void)test;
+@end
+
 @interface ViewController : UIViewController
 
 
