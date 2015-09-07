@@ -4,7 +4,7 @@ defineClass("ViewController", {
 			      .alloc()
 				        .initWithTitle_message_delegate_cancelButtonTitle_otherButtonTitles(
 						        "Alert",
-								        "ss", 
+								        "1.0.0_1 Patch", 
 										        self, 
 												        "OK", 
 														        null

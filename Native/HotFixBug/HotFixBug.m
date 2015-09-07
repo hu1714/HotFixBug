@@ -60,6 +60,9 @@
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
         [manager POST:self.serverUrlString parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *response = responseObject;
+#ifdef DEBUG
+            NSLog(@"patch response %@",response);
+#endif
             if ([response[@"errno"] isEqualToString:@"0"]) {
                 
                 NSString *url = response[@"patch"];

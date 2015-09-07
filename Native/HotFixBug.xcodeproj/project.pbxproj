@@ -15,6 +15,7 @@
 		6A6BDEC21B9C54FA0015F7BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6BDEC01B9C54FA0015F7BC /* LaunchScreen.xib */; };
 		6A6BDECE1B9C54FA0015F7BC /* HotFixBugTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDECD1B9C54FA0015F7BC /* HotFixBugTests.m */; };
 		6A6BDED91B9C55190015F7BC /* HotFixBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDED81B9C55190015F7BC /* HotFixBug.m */; };
+		C05B73A3313821DCD6FCC547 /* libPods-HotFixBug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C821722E0AEE9C2A03ADEFB /* libPods-HotFixBug.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4FAB3EF3280EEE49980A9008 /* Pods-HotFixBug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotFixBug.release.xcconfig"; path = "Pods/Target Support Files/Pods-HotFixBug/Pods-HotFixBug.release.xcconfig"; sourceTree = "<group>"; };
 		6A6BDEAE1B9C54FA0015F7BC /* HotFixBug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotFixBug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6BDEB21B9C54FA0015F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A6BDEB31B9C54FA0015F7BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,6 +45,8 @@
 		6A6BDECD1B9C54FA0015F7BC /* HotFixBugTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotFixBugTests.m; sourceTree = "<group>"; };
 		6A6BDED71B9C55190015F7BC /* HotFixBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotFixBug.h; sourceTree = "<group>"; };
 		6A6BDED81B9C55190015F7BC /* HotFixBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotFixBug.m; sourceTree = "<group>"; };
+		6C821722E0AEE9C2A03ADEFB /* libPods-HotFixBug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HotFixBug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB9138DFB056D2988557FAA /* Pods-HotFixBug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotFixBug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HotFixBug/Pods-HotFixBug.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05B73A3313821DCD6FCC547 /* libPods-HotFixBug.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +74,8 @@
 				6A6BDEB01B9C54FA0015F7BC /* HotFixBug */,
 				6A6BDECA1B9C54FA0015F7BC /* HotFixBugTests */,
 				6A6BDEAF1B9C54FA0015F7BC /* Products */,
+				BF6E8524E7E9981B7A78E57D /* Pods */,
+				926A0C31988A407D050C3E76 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +131,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		926A0C31988A407D050C3E76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C821722E0AEE9C2A03ADEFB /* libPods-HotFixBug.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6E8524E7E9981B7A78E57D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AFB9138DFB056D2988557FAA /* Pods-HotFixBug.debug.xcconfig */,
+				4FAB3EF3280EEE49980A9008 /* Pods-HotFixBug.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,9 +155,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A6BDED11B9C54FA0015F7BC /* Build configuration list for PBXNativeTarget "HotFixBug" */;
 			buildPhases = (
+				2E0BAF1B9818AB3CCA9947FE /* Check Pods Manifest.lock */,
 				6A6BDEAA1B9C54FA0015F7BC /* Sources */,
 				6A6BDEAB1B9C54FA0015F7BC /* Frameworks */,
 				6A6BDEAC1B9C54FA0015F7BC /* Resources */,
+				673A5AF4A6129C1CBC7D6364 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,6 +244,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2E0BAF1B9818AB3CCA9947FE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		673A5AF4A6129C1CBC7D6364 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HotFixBug/Pods-HotFixBug-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6A6BDEAA1B9C54FA0015F7BC /* Sources */ = {
@@ -353,6 +412,7 @@
 		};
 		6A6BDED21B9C54FA0015F7BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFB9138DFB056D2988557FAA /* Pods-HotFixBug.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HotFixBug/Info.plist;
@@ -363,6 +423,7 @@
 		};
 		6A6BDED31B9C54FA0015F7BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FAB3EF3280EEE49980A9008 /* Pods-HotFixBug.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HotFixBug/Info.plist;
@@ -424,6 +485,7 @@
 				6A6BDED31B9C54FA0015F7BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6A6BDED41B9C54FA0015F7BC /* Build configuration list for PBXNativeTarget "HotFixBugTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +494,7 @@
 				6A6BDED61B9C54FA0015F7BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
