@@ -11,6 +11,7 @@
 @interface HotFixBug : NSObject
 
 @property (nonatomic,copy) NSString *serverUrlString;
+@property (nonatomic,copy) NSString *pwd;
 
 -(void)excute;
 

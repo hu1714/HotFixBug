@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A0BA23F1B9EC56000BF8C3E /* HotFixBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BA23C1B9EC56000BF8C3E /* HotFixBug.m */; };
 		6A6BDEB41B9C54FA0015F7BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDEB31B9C54FA0015F7BC /* main.m */; };
 		6A6BDEB71B9C54FA0015F7BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDEB61B9C54FA0015F7BC /* AppDelegate.m */; };
 		6A6BDEBA1B9C54FA0015F7BC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDEB91B9C54FA0015F7BC /* ViewController.m */; };
@@ -14,7 +15,6 @@
 		6A6BDEBF1B9C54FA0015F7BC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A6BDEBE1B9C54FA0015F7BC /* Images.xcassets */; };
 		6A6BDEC21B9C54FA0015F7BC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6BDEC01B9C54FA0015F7BC /* LaunchScreen.xib */; };
 		6A6BDECE1B9C54FA0015F7BC /* HotFixBugTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDECD1B9C54FA0015F7BC /* HotFixBugTests.m */; };
-		6A6BDED91B9C55190015F7BC /* HotFixBug.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6BDED81B9C55190015F7BC /* HotFixBug.m */; };
 		C05B73A3313821DCD6FCC547 /* libPods-HotFixBug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C821722E0AEE9C2A03ADEFB /* libPods-HotFixBug.a */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		4FAB3EF3280EEE49980A9008 /* Pods-HotFixBug.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotFixBug.release.xcconfig"; path = "Pods/Target Support Files/Pods-HotFixBug/Pods-HotFixBug.release.xcconfig"; sourceTree = "<group>"; };
+		6A0BA23B1B9EC56000BF8C3E /* HotFixBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotFixBug.h; sourceTree = "<group>"; };
+		6A0BA23C1B9EC56000BF8C3E /* HotFixBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotFixBug.m; sourceTree = "<group>"; };
 		6A6BDEAE1B9C54FA0015F7BC /* HotFixBug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotFixBug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6BDEB21B9C54FA0015F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A6BDEB31B9C54FA0015F7BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,8 +45,6 @@
 		6A6BDEC71B9C54FA0015F7BC /* HotFixBugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HotFixBugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A6BDECC1B9C54FA0015F7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A6BDECD1B9C54FA0015F7BC /* HotFixBugTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotFixBugTests.m; sourceTree = "<group>"; };
-		6A6BDED71B9C55190015F7BC /* HotFixBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotFixBug.h; sourceTree = "<group>"; };
-		6A6BDED81B9C55190015F7BC /* HotFixBug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotFixBug.m; sourceTree = "<group>"; };
 		6C821722E0AEE9C2A03ADEFB /* libPods-HotFixBug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HotFixBug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFB9138DFB056D2988557FAA /* Pods-HotFixBug.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotFixBug.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HotFixBug/Pods-HotFixBug.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A0BA23A1B9EC56000BF8C3E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6A0BA23B1B9EC56000BF8C3E /* HotFixBug.h */,
+				6A0BA23C1B9EC56000BF8C3E /* HotFixBug.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		6A6BDEA51B9C54FA0015F7BC = {
 			isa = PBXGroup;
 			children = (
@@ -91,8 +100,7 @@
 		6A6BDEB01B9C54FA0015F7BC /* HotFixBug */ = {
 			isa = PBXGroup;
 			children = (
-				6A6BDED71B9C55190015F7BC /* HotFixBug.h */,
-				6A6BDED81B9C55190015F7BC /* HotFixBug.m */,
+				6A0BA23A1B9EC56000BF8C3E /* Classes */,
 				6A6BDEB51B9C54FA0015F7BC /* AppDelegate.h */,
 				6A6BDEB61B9C54FA0015F7BC /* AppDelegate.m */,
 				6A6BDEB81B9C54FA0015F7BC /* ViewController.h */,
@@ -285,7 +293,7 @@
 			files = (
 				6A6BDEBA1B9C54FA0015F7BC /* ViewController.m in Sources */,
 				6A6BDEB71B9C54FA0015F7BC /* AppDelegate.m in Sources */,
-				6A6BDED91B9C55190015F7BC /* HotFixBug.m in Sources */,
+				6A0BA23F1B9EC56000BF8C3E /* HotFixBug.m in Sources */,
 				6A6BDEB41B9C54FA0015F7BC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

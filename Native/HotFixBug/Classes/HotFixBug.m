@@ -9,6 +9,37 @@
 #import "HotFixBug.h"
 #import <JPEngine.h>
 #import <AFHTTPRequestOperationManager.h>
+#import <CommonCrypto/CommonCryptor.h>
+
+@interface NSData (Crypto)
+-(NSData*)decrypy:(NSString*)pass;
+@end
+
+@implementation NSData (Crypto)
+
+-(NSData *)decrypy:(NSString *)pass{
+    char keyPtr[kCCKeySizeAES128+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    [pass getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    NSUInteger dataLength = [self length];
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
+                                          kCCOptionECBMode,
+                                          keyPtr, kCCBlockSizeAES128,
+                                          NULL,
+                                          [self bytes], dataLength,
+                                          buffer, bufferSize,
+                                          &numBytesDecrypted);
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+    }
+    free(buffer);
+    return nil;
+}
+
+@end
 
 #define CurrentPatchKey @"cuPatch"
 #define ConfigFileName @"config.plist"
@@ -37,7 +68,17 @@
 }
 
 -(NSString*)jsStringWithPath:(NSString*)path{
-    return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    
+    NSData *deData = [data decrypy:self.pwd];
+    
+    if (!deData) {
+        NSLog(@"decrypy data error.");
+        return nil;
+    }
+    
+    return [NSString stringWithCString:deData.bytes encoding:NSUTF8StringEncoding];
 }
 
 -(void)requestForNewPatch:(NSDictionary*)config{
