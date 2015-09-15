@@ -36,7 +36,7 @@ function targetPatch($fs){
 	$HOST = 'http://127.0.0.1';
 
 	$appVersion = $_POST['appversion'];
-	$curPatch = $_POST['cuPatch'];
+	$curPatch = $_POST['cur_patch'];
 	if (is_dir($appVersion)){
 		$fs=scandir($appVersion);
 		$target = targetPatch($fs);
@@ -47,8 +47,8 @@ function targetPatch($fs){
 				response(['errno' => '2']);
 			}else{
 				$res = ['errno' => '0'];
-				$res['name'] = $target;
-				$res['patch'] = $HOST.'/'.$appVersion.'/'.$target;
+				$res['patch_name'] = $target;
+				$res['patch_url'] = $HOST.'/'.$appVersion.'/'.$target;
 				response($res);
 			}
 		}

@@ -41,12 +41,16 @@
 
 @end
 
-#define CurrentPatchKey @"cuPatch"
+#define CurrentPatchKey @"cur_patch"
 #define ConfigFileName @"config.plist"
 
 @implementation HotFixBug
 
 -(void)excute{
+#ifdef DEBUG
+    NSLog(@"JsPatch Path:%@",[self dirPath]);
+#endif
+    
     [JPEngine startEngine];
     
     NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[self configPath]];
@@ -106,8 +110,8 @@
 #endif
             if ([response[@"errno"] isEqualToString:@"0"]) {
                 
-                NSString *url = response[@"patch"];
-                NSString *name = response[@"name"];
+                NSString *url = response[@"patch_url"];
+                NSString *name = response[@"patch_name"];
                 if (url && name) {
                     [self downLoadPatch:url name:name];
                 }else{
