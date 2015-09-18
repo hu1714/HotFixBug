@@ -97,6 +97,7 @@
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:[self version] forKey:@"appversion"];
+        [dict setObject:[[NSBundle mainBundle]bundleIdentifier] forKey:@"bid"];
         if (cuPatch) {
             [dict setObject:cuPatch forKey:CurrentPatchKey];
         }
