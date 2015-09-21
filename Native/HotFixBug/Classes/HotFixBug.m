@@ -11,6 +11,26 @@
 #import <AFHTTPRequestOperationManager.h>
 #import <CommonCrypto/CommonCryptor.h>
 
+#define HFB_CurrentPatchKey @"cur_patch"
+#define HFB_CleanupKey @"cleanup"
+#define HFB_ConfigFileName @"config.plist"
+
+static NSMutableDictionary *_config = nil;
+
+@interface HotFixBug ()
++(void)synchronizeConfig;
+@end
+
+static void MyECH(NSException *exception){
+    for (NSString *lib in exception.callStackSymbols) {
+        if ([lib rangeOfString:@"callSelector"].length != 0) {
+            [_config setObject:@"YES" forKey:HFB_CleanupKey];
+            [HotFixBug synchronizeConfig];
+            break;
+        }
+    }
+}
+
 @interface NSData (Crypto)
 -(NSData*)decrypy:(NSString*)pass;
 @end
@@ -41,19 +61,26 @@
 
 @end
 
-#define CurrentPatchKey @"cur_patch"
-#define ConfigFileName @"config.plist"
-
 @implementation HotFixBug
+
++(void)load{
+    _config = [NSMutableDictionary dictionaryWithContentsOfFile:[self configPath]];
+    
+    if (_config == nil) {
+        _config = [NSMutableDictionary dictionary];
+    }
+    
+    NSSetUncaughtExceptionHandler(&MyECH);
+}
 
 -(void)excute{
 #ifdef DEBUG
-    NSLog(@"JsPatch Path:%@",[self dirPath]);
+    NSLog(@"JsPatch Path:%@",[[self class] dirPath]);
 #endif
     
     [JPEngine startEngine];
     
-    NSDictionary *config = [NSDictionary dictionaryWithContentsOfFile:[self configPath]];
+    NSDictionary *config = _config;
     
     [self loadPatch:config];
     
@@ -61,14 +88,25 @@
 }
 
 -(void)loadPatch:(NSDictionary*)config{
-    NSString *cuPatch = config[CurrentPatchKey];
-    if (cuPatch && [cuPatch hasPrefix:[self version]]) {
-        NSString *pp = [[self dirPath] stringByAppendingPathComponent:cuPatch];
-        NSString *js = [self jsStringWithPath:pp];
-        if (js) {
-            [JPEngine evaluateScript:js];
+    NSString *cuPatch = config[HFB_CurrentPatchKey];
+    NSString *cleanUp = config[HFB_CleanupKey];
+    
+    if (cleanUp) {
+         NSLog(@"Clean Up because of crash last time in js file.");
+        [_config removeObjectForKey:HFB_CleanupKey];
+        [_config removeObjectForKey:HFB_CurrentPatchKey];
+        [[self class] synchronizeConfig];
+        
+    }else{
+        if (cuPatch && [cuPatch hasPrefix:[self version]]) {
+            NSString *pp = [[[self class] dirPath] stringByAppendingPathComponent:cuPatch];
+            NSString *js = [self jsStringWithPath:pp];
+            if (js) {
+                [JPEngine evaluateScript:js];
+            }
         }
     }
+   
 }
 
 -(NSString*)jsStringWithPath:(NSString*)path{
@@ -93,13 +131,13 @@
             return;
         }
         
-        NSString *cuPatch = config[CurrentPatchKey];
+        NSString *cuPatch = config[HFB_CurrentPatchKey];
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         [dict setObject:[self version] forKey:@"appversion"];
         [dict setObject:[[NSBundle mainBundle]bundleIdentifier] forKey:@"bid"];
         if (cuPatch) {
-            [dict setObject:cuPatch forKey:CurrentPatchKey];
+            [dict setObject:cuPatch forKey:HFB_CurrentPatchKey];
         }
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -130,7 +168,7 @@
 
 -(void)downLoadPatch:(NSString*)patchurl name:(NSString*)name{
     
-    NSString *path = [[self dirPath] stringByAppendingPathComponent:name];
+    NSString *path = [[[self class] dirPath] stringByAppendingPathComponent:name];
     
     NSURL *url = [NSURL URLWithString:patchurl];
     NSURLRequest *requst = [NSURLRequest requestWithURL:url];
@@ -139,8 +177,8 @@
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"down load patch ok.");
         
-        NSDictionary *configdict = [NSDictionary dictionaryWithObject:name forKey:CurrentPatchKey];
-        [configdict writeToFile:[self configPath] atomically:YES];
+        [_config setObject:name forKey:HFB_CurrentPatchKey];
+        [[self class] synchronizeConfig];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to download patch.");
@@ -153,7 +191,11 @@
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 }
 
--(NSString*)dirPath{
++(void)synchronizeConfig{
+    [_config writeToFile:[self configPath] atomically:YES];
+}
+
++(NSString*)dirPath{
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *tmp = [paths lastObject];
@@ -166,8 +208,8 @@
     return msgdir;
 }
 
--(NSString*)configPath{
-    return [[self dirPath] stringByAppendingPathComponent:ConfigFileName];
++(NSString*)configPath{
+    return [[self dirPath] stringByAppendingPathComponent:HFB_ConfigFileName];
 }
 
 @end
