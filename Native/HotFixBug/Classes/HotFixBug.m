@@ -16,6 +16,7 @@
 #define HFB_ConfigFileName @"config.plist"
 
 static NSMutableDictionary *_config = nil;
+static NSUncaughtExceptionHandler *_oldHandler = NULL;
 
 @interface HotFixBug ()
 +(void)synchronizeConfig;
@@ -28,6 +29,10 @@ static void MyECH(NSException *exception){
             [HotFixBug synchronizeConfig];
             break;
         }
+    }
+    
+    if (_oldHandler) {
+        _oldHandler(exception);
     }
 }
 
@@ -69,6 +74,8 @@ static void MyECH(NSException *exception){
     if (_config == nil) {
         _config = [NSMutableDictionary dictionary];
     }
+    
+    _oldHandler = NSGetUncaughtExceptionHandler();
     
     NSSetUncaughtExceptionHandler(&MyECH);
 }
