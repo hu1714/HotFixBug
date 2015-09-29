@@ -13,6 +13,6 @@
 @property (nonatomic,copy) NSString *serverUrlString;
 @property (nonatomic,copy) NSString *pwd;
 
--(void)excute;
+-(void)excute:(dispatch_block_t)didDownloadPatch;
 
 @end

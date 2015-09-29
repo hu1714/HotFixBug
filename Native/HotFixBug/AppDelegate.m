@@ -22,7 +22,7 @@
     HotFixBug *hfb = [[HotFixBug alloc] init];
     hfb.serverUrlString = @"http://127.0.0.1";
     hfb.pwd = @"0123456789abcdef";
-    [hfb excute];
+    [hfb excute:nil];
     
     return YES;
 }

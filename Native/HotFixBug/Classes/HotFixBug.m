@@ -73,7 +73,7 @@ static void MyECH(NSException *exception){
     NSSetUncaughtExceptionHandler(&MyECH);
 }
 
--(void)excute{
+-(void)excute:(dispatch_block_t)didDownloadPatch{
 #ifdef DEBUG
     NSLog(@"JsPatch Path:%@",[[self class] dirPath]);
 #endif
@@ -84,7 +84,7 @@ static void MyECH(NSException *exception){
     
     [self loadPatch:config];
     
-    [self requestForNewPatch:config];
+    [self requestForNewPatch:config didDownLoadPatch:didDownloadPatch];
 }
 
 -(void)loadPatch:(NSDictionary*)config{
@@ -123,7 +123,7 @@ static void MyECH(NSException *exception){
     return [NSString stringWithCString:deData.bytes encoding:NSUTF8StringEncoding];
 }
 
--(void)requestForNewPatch:(NSDictionary*)config{
+-(void)requestForNewPatch:(NSDictionary*)config didDownLoadPatch:(dispatch_block_t)block{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
         if (!self.serverUrlString) {
@@ -152,7 +152,7 @@ static void MyECH(NSException *exception){
                 NSString *url = response[@"patch_url"];
                 NSString *name = response[@"patch_name"];
                 if (url && name) {
-                    [self downLoadPatch:url name:name];
+                    [self downLoadPatch:url name:name didDownLoadPatch:block];
                 }else{
                     NSLog(@"no patch.");
                 }
@@ -166,7 +166,7 @@ static void MyECH(NSException *exception){
     });
 }
 
--(void)downLoadPatch:(NSString*)patchurl name:(NSString*)name{
+-(void)downLoadPatch:(NSString*)patchurl name:(NSString*)name didDownLoadPatch:(dispatch_block_t)block{
     
     NSString *path = [[[self class] dirPath] stringByAppendingPathComponent:name];
     
@@ -179,6 +179,10 @@ static void MyECH(NSException *exception){
         
         [_config setObject:name forKey:HFB_CurrentPatchKey];
         [[self class] synchronizeConfig];
+        
+        if (block) {
+            block();
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to download patch.");
