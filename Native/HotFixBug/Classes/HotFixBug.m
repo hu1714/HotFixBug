@@ -116,6 +116,23 @@ static void MyECH(NSException *exception){
    
 }
 
+-(void)evaluateScriptInMainBundleForName:(NSString *)name type:(NSString *)type{
+    
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:type]];
+    
+    if (data.length>0) {
+        
+        NSString *js = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        [JPEngine startEngine];
+        
+        if (js) {
+            [JPEngine evaluateScript:js];
+        }
+    }
+
+}
+
 -(NSString*)jsStringWithPath:(NSString*)path{
     
     NSData *data = [NSData dataWithContentsOfFile:path];
@@ -127,7 +144,7 @@ static void MyECH(NSException *exception){
         return nil;
     }
     
-    return [NSString stringWithCString:deData.bytes encoding:NSUTF8StringEncoding];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 -(void)requestForNewPatch:(NSDictionary*)config didDownLoadPatch:(dispatch_block_t)block{

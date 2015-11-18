@@ -13,6 +13,8 @@
 @property (nonatomic,copy) NSString *serverUrlString;
 @property (nonatomic,copy) NSString *pwd;
 
+-(void)evaluateScriptInMainBundleForName:(NSString*)name type:(NSString*)type;
+
 -(void)excute:(dispatch_block_t)didDownloadPatch;
 
 @end
