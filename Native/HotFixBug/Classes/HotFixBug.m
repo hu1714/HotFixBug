@@ -143,8 +143,7 @@ static void MyECH(NSException *exception){
         NSLog(@"decrypy data error.");
         return nil;
     }
-    
-    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return [NSString stringWithCString:deData.bytes encoding:NSUTF8StringEncoding];
 }
 
 -(void)requestForNewPatch:(NSDictionary*)config didDownLoadPatch:(dispatch_block_t)block{
@@ -185,7 +184,7 @@ static void MyECH(NSException *exception){
                 NSLog(@"post for download patch url fail.%@",response[@"errmsg"]);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"post for download patch url fail.");
+            NSLog(@"post for download patch url fail.%@",[error debugDescription]);
         }];
     });
 }
